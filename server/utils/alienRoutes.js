@@ -1,18 +1,39 @@
 /**
  * Created by jmichelin on 6/18/17.
  */
-const Router = require('koa-router');
-const router = new Router();
-const mathHander = require('../utils/math');
 
-router.get('/', async function (ctx, next) {
-  await ctx.render('alienLandingPage');
-});
+const mathHandler = require('./math');
 
-router.get('/showResult', async function (ctx, next) {
-  let alienStatus = 'dead';
-  if (mathHander.randomInt(0,1) === 1) { alienStatus='alive'; }
-  await ctx.render('alienResults', {alienStatus});
-});
+exports.register = function (server, options, next) {
+  server.route([
+    {
+      method: 'GET',
+      path: '/',
+      handler: function (request, reply) {
+        //reply('Hello, world!');
+        reply.view('alienLandingPage', {
+          title: 'examples/views/ejs/index.js | Hapi ' + request.server.version,
+          message: 'Index - Hello World!'
+        });
+      }
+    },
+    {
+      method: 'GET',
+      path: '/showResult',
+      handler: function (request, reply) {
+        //reply('Hello, world!');
+        let alienStatus = 'alive';
+        if(mathHandler.randomInt(0,1) === 0) { alienStatus = 'dead'}
+        reply.view('alienResults', {
+          title: 'examples/views/ejs/index.js | Hapi ' + request.server.version,
+          alienStatus: alienStatus
+        });
+      }
+    }
+  ]);
+  return next();
+};
 
-module.exports = router;
+exports.register.attributes = {
+  name: 'alienRoutes'
+};
