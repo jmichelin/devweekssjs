@@ -1,8 +1,15 @@
 const http = require('http');
-const fs = require('fs');
+const url = require('url');
+
+const routes = require('../server/utils/routes');
+
+
+
 
 const hostname = '127.0.0.1';
 const port = 3000;
+
+
 
 // function readContent(callback) {
 //   fs.readFile("./Index.html", function (err, content) {
@@ -15,22 +22,19 @@ const port = 3000;
 //   console.log(content)
 // })
 
-
-const readTemplate = (cb) => {
-  fs.readFile("./templates/alienLandingPage.html", 'utf8', (err, data) => {
-    if (err) return cb(err);
-    cb(null, data);
-  });
-};
-
 const server = http.createServer((req, res) => {
+
+  routes.handleFavicon(req.url);
+  routes.handleRequest(req, res);
+
+  console.log(url.parse(req.url).pathname);
   res.setHeader('Content-Type', 'text/html');
-  res.setHeader('X-Dev', 'week');
   res.writeHead(200);
-  readTemplate((err, data) => {
-    res.write(data)
-    res.end();
-  });
+
+
+
+
+
 });
 
 server.listen(port, hostname, () => {
