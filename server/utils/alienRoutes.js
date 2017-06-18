@@ -1,27 +1,18 @@
 /**
  * Created by jmichelin on 6/18/17.
  */
-const express = require('express');
-const router = express.Router();
-const handleMath = require('../utils/math');
+const Router = require('koa-router');
+const router = new Router();
+const mathHander = require('../utils/math');
 
-// middleware that is specific to this router
-router.use(function timeLog (req, res, next) {
-  console.log('Time: ', Date.now());
-  let randomValue = handleMath.randomInt(0, 1);
-  let alienStatus = 'alive';
-  if(randomValue === 0) { alienStatus = 'dead'}
-  next(alienStatus);
+router.get('/', async function (ctx, next) {
+  await ctx.render('alienLandingPage');
 });
 
-// define the home page route
-router.get('/', function (req, res) {
-  res.render('alienResults.ejs');
-});
-
-// define the about route
-router.get('/about', function (req, res) {
-  res.send('About birds');
+router.get('/showResult', async function (ctx, next) {
+  let alienStatus = 'dead';
+  if (mathHander.randomInt(0,1) === 1) { alienStatus='alive'; }
+  await ctx.render('alienResults', {alienStatus});
 });
 
 module.exports = router;
