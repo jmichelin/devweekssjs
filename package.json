@@ -18,5 +18,8 @@
   "homepage": "https://github.com/jmichelin/devweekssjs#readme",
   "devDependencies": {
     "eslint": "4.0.0"
+  },
+  "dependencies": {
+    "ejs": "2.5.6"
   }
 }

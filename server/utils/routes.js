@@ -32,7 +32,7 @@ const paths = {
 
 
 const handleGetPath = (path, res) => {
-  let fileName = paths[path].fileName;
+  let fileName = '';
   if (path === '/showResult') {
     let randomValue = handleMath.randomInt(0, 1);
     if (randomValue === 1) {
@@ -40,6 +40,8 @@ const handleGetPath = (path, res) => {
     } else {
       fileName = "./templates/alienDead.html";
     }
+  } else {
+    fileName = paths[path].fileName
   }
     handleFiles.readTemplate(fileName, (err, data) => {
       res.write(data);
