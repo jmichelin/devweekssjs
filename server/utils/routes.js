@@ -32,7 +32,7 @@ const paths = {
 
 
 const handleGetPath = (path, res) => {
-  let fileName = '';
+  let fileName = paths[path].fileName;
   if (path === '/showResult') {
     let randomValue = handleMath.randomInt(0, 1);
     if (randomValue === 1) {
