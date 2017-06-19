@@ -27,11 +27,15 @@ const paths = {
   },
   '/showAlive': {
     fileName: "./templates/alienAlive.html"
+  },
+  '/static/box.png': {
+    fileName: "./server/static/box.png"
   }
 };
 
 
 const handleGetPath = (path, res) => {
+  console.log(path)
   let fileName = '';
   if (path === '/showResult') {
     let randomValue = handleMath.randomInt(0, 1);
@@ -41,7 +45,7 @@ const handleGetPath = (path, res) => {
       fileName = "./templates/alienDead.html";
     }
   } else {
-    fileName = paths[path].fileName
+    fileName = paths[path].fileName;
   }
     handleFiles.readTemplate(fileName, (err, data) => {
       res.write(data);
