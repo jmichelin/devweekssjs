@@ -4,7 +4,8 @@
   "description": "examples of building an api using node and it's frameworks",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sm": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
