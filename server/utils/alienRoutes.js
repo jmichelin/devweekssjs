@@ -10,8 +10,8 @@ router.get('/', async function (ctx, next) {
 });
 
 router.get('/showResult', async function (ctx, next) {
-  let alienStatus = 'dead';
-  if (mathHander.randomInt(0,1) === 1) { alienStatus='alive'; }
+  let alienStatus = 'https://javascriptjohn.files.wordpress.com/2017/06/sleepingalien.png';
+  if (mathHander.randomInt(0,1) === 1) { alienStatus='https://javascriptjohn.files.wordpress.com/2017/06/alivealien.png'; }
   await ctx.render('alienResults', {alienStatus});
 });
 
