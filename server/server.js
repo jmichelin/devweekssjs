@@ -10,18 +10,6 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 
-
-// function readContent(callback) {
-//   fs.readFile("./Index.html", function (err, content) {
-//     if (err) return callback(err)
-//     callback(null, content)
-//   })
-// }
-//
-// readContent(function (err, content) {
-//   console.log(content)
-// })
-
 const server = http.createServer((req, res) => {
 
   routes.handleFavicon(req.url);
